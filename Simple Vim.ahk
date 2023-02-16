@@ -46,27 +46,6 @@ SetWorkingDir, %A_ScriptDir%
     send, {Right}
     Return
 
-; Alt + Ctrl + i
-!^i::
-    Send, {Up}
-    Send, {Up}
-    Return
-; Alt + Ctrl + j
-!^j::
-    send, {Left}
-    send, {Left}
-    Return
-; Alt + Ctrl + k
-!^k::
-    send, {Down}
-    send, {Down}
-    Return
-; Alt + Ctrl + l
-!^l::
-    send, {Right}
-    send, {Right}
-    Return
-
 ; Alt + `
 !`::
     MsgBox, 0, Simple Vim, Simple Vim process is working., 5
