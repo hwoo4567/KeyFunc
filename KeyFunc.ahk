@@ -1,56 +1,64 @@
-/**
- * ******************** Simple Vim ********************
- * 
- * 이 프로그램은 Vim의 h, j, k, l로 커서를 이동하는 방식을
- * 일반 환경에서 편리하게 사용하기 위해 개발된 프로그램입니다.
- * 
- * 원래 Vim의 커서 이동 조작키보다 w, a, s, d와 유사한 형태인
- * i, j, k, l 키가 더 익숙하기 때문에 단축키에 수정이 있었습니다.
- * 
- *     [i]
- * [j] [k] [l]
- * 
- * [단축키]
- * Alt + i: 윗쪽 화살표
- * Alt + j: 왼쪽 화살표
- * Alt + k: 아랫쪽 화살표
- * Alt + l: 오른쪽 화살표
- * 
- * Alt + Ctrl + i: 윗쪽 화살표 x 2
- * Alt + Ctrl + j: 왼쪽 화살표 x 2
- * Alt + Ctrl + k: 아랫쪽 화살표 x 2
- * Alt + Ctrl + l: 오른쪽 화살표 x 2
- * 
- * Alt + Esc: 프로그램 종료
- * Alt + `: 프로그램 실행 표시
-*/
 
-#SingleInstance, Force
-SendMode Input
-SetWorkingDir, %A_ScriptDir%
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; [ autoHokey 문법 정리 ]
+; #: Win
+; !: Alt
+; ^: Ctrl
+; +: Shift
+; &: 두개의 키 조합
+; send는 한문자 일일이 타이핑하게 되고 (속도가 느리고)
+; sendinput은 복사하여 붙여넣는 스피드로 (속도가 빠르다)
+; { } 안에는 특정 키를 누르게 되며, { } 없는 것은 문자열로 인식하게 되어 타이핑 쳐지게 된다.
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-; Alt + i
-!i::
-    Send, {Up}
-    Return
-; Alt + j
-!j::
-    send, {Left}
-    Return
-; Alt + k
-!k::
-    send, {Down}
-    Return
-; Alt + l
-!l::
-    send, {Right}
-    Return
+#SingleInstance, Force             ; 하나의 프로세스만 실행되도록 함
+SendMode Input                     ; 모든 SendMode를 SendInput으로 설정함
+SetWorkingDir, %A_ScriptDir%       ; 프로그램 실행 공간 설정
 
-; Alt + `
-!`::
-    MsgBox, 0, Simple Vim, Simple Vim process is working., 5
-    Return
-; Alt + Esc
-!Esc::
-    MsgBox, 0, Simple Vim, Simple Vim was closed., 5
+; 기본 capslock기능을 꺼둠
+SetCapsLockState, AlwaysOff
+
+; capslock + f 키로 기본 capslock를 키고 끔
+Capslock & f::Capslock
+
+;--------------------------------------------------------------------------------------------------
+; [ 캡스락 키를 누르고 있을 때 ]
+#If GetKeyState("Capslock","P")
+
+; ---- 코딩 기능 ----
+; 방향키 ijkl
+i::Up
+j::Left
+k::Down
+l::Right
+
+; 캡스락 + uo : 단어 건너뛰는 이동
+u::^Left
+o::^Right
+
+; 캡스락 + q + ijkl : 글자 선택 이동
+q & i::+Up
+q & j::+Left
+q & k::+Down
+q & l::+Right
+
+; 캡스락 + q + uo : 단어 건너뛰며 선택하는 이동
+q & u::^+Left
+q & o::^+Right
+
+; 캡스락 + Enter : 커서를 끝까지 옮기지 않고 그 자리에서 바로 엔터처리
+Enter::^Enter
+
+; ---- 디자인 기능 ----
+; 캡스락 + s : Backspace
+s::BackSpace
+; 캡스락 + d : Delete
+d::Del
+
+; 캡스락 + Esc : 프로그램 종료
+Esc::
+    MsgBox, 0, KeyFunc, KeyFunc was closed., 5
     ExitApp
+
+#If
+;--------------------------------------------------------------------------------------------------
