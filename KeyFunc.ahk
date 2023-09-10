@@ -18,8 +18,8 @@ SetWorkingDir, %A_ScriptDir%       ; 프로그램 실행 공간 설정
 ; 기본 capslock기능을 꺼둠
 SetCapsLockState, AlwaysOff
 
-; capslock + f 키로 기본 capslock를 키고 끔
-Capslock & f::Capslock
+; capslock + c 키로 기본 capslock를 키고 끔
+Capslock & c::Capslock
 
 ;--------------------------------------------------------------------------------------------------
 ; [ 캡스락 키를 누르고 있을 때 ]
@@ -35,16 +35,6 @@ l::Right
 ; 캡스락 + uo : 단어 건너뛰는 이동
 u::^Left
 o::^Right
-
-; 캡스락 + q + ijkl : 글자 선택 이동
-q & i::+Up
-q & j::+Left
-q & k::+Down
-q & l::+Right
-
-; 캡스락 + q + uo : 단어 건너뛰며 선택하는 이동
-q & u::^+Left
-q & o::^+Right
 
 ; 캡스락 + Enter : 커서를 끝까지 옮기지 않고 그 자리에서 바로 엔터처리
 Enter::^Enter

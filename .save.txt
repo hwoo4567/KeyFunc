@@ -1,0 +1,8 @@
+; 0.1초 기다리기
+
+~G::
+Sleep 100
+KeyWait,G,D T0.5
+if (errorlevel=0)
+	Send 안녕하세요
+return
