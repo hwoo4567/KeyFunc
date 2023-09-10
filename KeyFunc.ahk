@@ -45,6 +45,11 @@ s::BackSpace
 ; 캡스락 + d : Delete
 d::Del
 
+; 캡스락 + Space : 한/영 단축키
+Space::
+    Send, {vk15sc138}
+return
+
 ; 캡스락 + Esc : 프로그램 종료
 Esc::
     MsgBox, 0, KeyFunc, KeyFunc was closed., 5
